@@ -11,12 +11,13 @@ public class Car {
     private String brand, model, color, registerNumber;
     private int year, price;
 
-    @ManyToMany(mappedBy = "cars")
-    private Set<Owner> owners;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    private Owner owner;
 
     public Car() { }
 
-    public Car(String brand, String model, String color, String registerNumber, int year, int price, Set<Owner> onwers) {
+    public Car(String brand, String model, String color, String registerNumber, int year, int price, Owner owner) {
         super();
         this.brand = brand;
         this.model = model;
@@ -24,7 +25,7 @@ public class Car {
         this.registerNumber = registerNumber;
         this.year = year;
         this.price = price;
-        this.owners = onwers;
+        this.owner = owner;
     }
 
     public String getBrand() {
@@ -75,11 +76,11 @@ public class Car {
         this.price = price;
     }
 
-    public Set<Owner> getOwners() {
-        return owners;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwners(Set<Owner> owners) {
-        this.owners = owners;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }
